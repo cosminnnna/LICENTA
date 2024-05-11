@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GcVeTo6ukjZKQ0BPQyMntOoT1/SQgQbjdqExzeZjSKbz3edTB645IAzmC+N47zVZKP8/DcHCqLhNDRHMIWgTiA==",
+  "dgSpecHash": "9YBP8nqPmDK7SeOzSUTrESmxAYcRaR0h5Uh1fWaYTcrweow1KPzxroTRMmYBnF812XqUGAw5PZvCO3kB7j6d4Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\RecipesProject\\RecipesProject.csproj",
+  "projectFilePath": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\RecipesProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cosmi\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
@@ -139,6 +139,7 @@
     "C:\\Users\\cosmi\\.nuget\\packages\\nuget.projectmodel\\6.6.1\\nuget.projectmodel.6.6.1.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\nuget.protocol\\6.6.1\\nuget.protocol.6.6.1.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\nuget.versioning\\6.6.1\\nuget.versioning.6.6.1.nupkg.sha512",
+    "C:\\Users\\cosmi\\.nuget\\packages\\python.runtime\\2.7.9\\python.runtime.2.7.9.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\cosmi\\.nuget\\packages\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
