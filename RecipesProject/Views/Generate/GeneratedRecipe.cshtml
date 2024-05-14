@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Generated Recipe";
+}
+
+<h1>Generated Recipe</h1>
+<p>@ViewData["Response"]</p>
+
+<form asp-controller="Recipe" asp-action="Create" method="post">
+    <input type="hidden" name="text" value="@ViewData["Response"]" />
+    <button type="submit">Save Recipe</button>
+</form>

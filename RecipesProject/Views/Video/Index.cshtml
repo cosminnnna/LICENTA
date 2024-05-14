@@ -1,0 +1,27 @@
+﻿@model List<string>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Thumbnails</title>
+</head>
+<body>
+    <h1>Video Thumbnails</h1>
+
+    <div id="video-thumbnails">
+        @foreach (var videoLink in Model)
+        {
+            <div class="thumbnail">
+                <a href="@videoLink" target="_blank">
+                    @{
+                        // Extrage ID-ul videoclipului YouTube din URL
+                        var videoIdStartIndex = videoLink.IndexOf("?v=") + 3;
+                        var videoId = videoLink.Substring(videoIdStartIndex);
+                    }
+                    <img src="https://img.youtube.com/vi/@videoId/0.jpg" alt="Thumbnail videoclip">
+                </a>
+            </div>
+        }
+    </div>
+</body>
+</html>

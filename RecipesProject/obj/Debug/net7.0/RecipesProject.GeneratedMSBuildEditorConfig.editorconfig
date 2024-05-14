@@ -178,6 +178,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/Generate/Generate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuZXJhdGVcR2VuZXJhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/Generate/GeneratedRecipe.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuZXJhdGVcR2VuZXJhdGVkUmVjaXBlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -186,12 +194,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/Recipe/Generate.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjaXBlXEdlbmVyYXRlLmNzaHRtbA==
+[C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/List/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/Recipe/GeneratedRecipe.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjaXBlXEdlbmVyYXRlZFJlY2lwZS5jc2h0bWw=
+[C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/Recicle/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjaWNsZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/Recipe/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjaXBlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/Shared/Error.cshtml]
@@ -204,6 +216,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/Video/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlkZW9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/cosmi/Desktop/LICENTA/RecipesProject/LICENTA/RecipesProject/Views/_ViewImports.cshtml]

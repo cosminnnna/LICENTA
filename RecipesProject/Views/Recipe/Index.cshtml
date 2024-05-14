@@ -1,0 +1,21 @@
+﻿@model IEnumerable<RecipesProject.Models.Recipe>
+
+@{
+    ViewData["Title"] = "Saved Recipes";
+}
+
+<h1>Saved Recipes</h1>
+
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var recipe in Model)
+        {
+            <li>@recipe.Description</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No recipes saved yet.</p>
+}

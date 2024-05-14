@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RecipesProject.Models;
 
 namespace RecipesProject.Data
 {
@@ -9,5 +10,7 @@ namespace RecipesProject.Data
             : base(options)
         {
         }
+
+        public DbSet<Recipe> Recipes { get; set; }
     }
 }

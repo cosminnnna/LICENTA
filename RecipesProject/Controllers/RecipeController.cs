@@ -1,59 +1,63 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-/*using System.IO;
-using System;*/
+using RecipesProject.Data;
+using RecipesProject.Models;
+using System.Linq;
 
 namespace RecipesProject.Controllers
 {
     public class RecipeController : Controller
     {
-        public IActionResult Generate()
+        private readonly ApplicationDbContext _context;
+
+        public RecipeController(ApplicationDbContext context)
         {
-            return View("Generate");
+            _context = context;
+        }
+
+        public IActionResult Index()
+        {
+            // Afișează toate rețetele salvate din baza de date
+            var recipes = _context.Recipes.ToList();
+            return View(recipes);
         }
 
         [HttpPost]
-        public IActionResult Generate(string ingredient1, string ingredient2, string ingredient3)
+        public IActionResult Create(string text)
         {
-            string response = GetCompletionFromPythonScript(ingredient1, ingredient2, ingredient3);
-            ViewData["Response"] = response;
-            return View("GeneratedRecipe", ViewData);
+            // Crează o nouă instanță a modelului Recipe și salvează textul rețetei în câmpul corespunzător
+            var newRecipe = new Recipe { Description = text };
+
+            // Adaugă rețeta nouă în contextul bazei de date și salvează modificările
+            _context.Recipes.Add(newRecipe);
+            _context.SaveChanges();
+
+            // Redirectează către acțiunea "Index" care afișează toate rețetele
+            return RedirectToAction("Index");
         }
-       
-        private string GetCompletionFromPythonScript(string ingredient1, string ingredient2, string ingredient3)
+
+        // Acțiune pentru a afișa detalii despre o rețetă
+        public IActionResult Details(int id)
         {
-            string result = string.Empty;
+            var recipe = _context.Recipes.FirstOrDefault(r => r.Id == id);
+            return View(recipe);
+        }
 
-            // Specificarea căii către interpreterul Python și scriptul nostru
-            string pythonPath = "C:\\Users\\cosmi\\AppData\\Local\\Programs\\Python\\Python310\\python.exe"; // Înlocuiește cu calea către interpreterul Python
-            string scriptPath = "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\PhythonScripts\\ApiScript.py"; // Înlocuiește cu calea către scriptul Python
+        // Acțiune pentru a actualiza o rețetă existentă
+        [HttpPost]
+        public IActionResult Update(Recipe recipe)
+        {
+            _context.Recipes.Update(recipe);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-            // Construirea comenzii pentru a rula scriptul Python
-            string arguments = $"{scriptPath} {ingredient1} {ingredient2} {ingredient3}";
-            ProcessStartInfo startInfo = new ProcessStartInfo
-            {
-                FileName = pythonPath,
-                Arguments = arguments,
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-
-            // Pornirea procesului și citirea rezultatului din ieșirea standard
-            using (Process process = Process.Start(startInfo))
-            {
-                if (process != null)
-                {
-                    using (StreamReader reader = process.StandardOutput)
-                    {
-                        result = reader.ReadToEnd();
-                    }
-                }
-            }
-
-            return result;
+        // Acțiune pentru a șterge o rețetă
+        public IActionResult Delete(int id)
+        {
+            var recipe = _context.Recipes.FirstOrDefault(r => r.Id == id);
+            _context.Recipes.Remove(recipe);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
-
-
