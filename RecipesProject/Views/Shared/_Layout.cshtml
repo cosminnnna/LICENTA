@@ -23,8 +23,8 @@
                                 Menu
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Pantry">Pantry</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Generate" asp-action="Generate">Generate Recipe</a>
+@*                                 <a class="dropdown-item" asp-area="" asp-controller="Pantry" asp-action="Index">Pantry</a>
+ *@                                <a class="dropdown-item" asp-area="" asp-controller="Generate" asp-action="Generate">Generate Recipe</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Video" asp-action="Index">News</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="List" asp-action="Index">Shopping List</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Recicle" asp-action="Index">Recicle Map</a>
@@ -53,6 +53,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("scripts", required: false)
 </body>
 </html>

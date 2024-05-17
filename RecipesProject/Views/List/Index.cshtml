@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model IEnumerable<List>
+
+<h2>Liste de cumpărături</h2>
+
+<form asp-action="AddList" method="post">
+    <input type="text" name="name" placeholder="Nume lista nouă" />
+    <button type="submit">Adaugă listă</button>
+</form>
+
+@foreach (var list in Model)
+{
+    <h3>@list.Name</h3>
+    <form asp-action="AddItem" method="post">
+        <input type="hidden" name="listId" value="@list.Id" />
+        <input type="text" name="text" placeholder="Adaugă element nou" />
+        <button type="submit">Adaugă</button>
+    </form>
+    <ul>
+        @foreach (var item in list.Items)
+        {
+            <li>
+                <form asp-action="ToggleItem" method="post" style="display:inline;">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <input type="checkbox" onchange="this.form.submit();" @(item.IsChecked ? "checked" : "") />
+                    @Html.DisplayFor(modelItem => item.Text)
+                </form>
+            </li>
+        }
+    </ul>
 }

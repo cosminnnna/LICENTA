@@ -1,5 +1,165 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewBag.Title = "Recicle";
+}
+
+<h2>Recicle</h2>
+<button id="myLocationButton" class="btn btn-primary">My Location</button>
+<br />
+<br />
+<button id="paperButton" class="btn btn-primary">Paper</button>
+<button id="plasticButton" class="btn btn-primary">Plastic</button>
+<button id="glassButton" class="btn btn-primary">Glass</button>
+<button id="metalButton" class="btn btn-primary">Metal</button>
+<br />
+<div id="map" style="height: 400px;"></div>
+
+@section scripts {
+    <script>
+        var map;
+
+        // Funcția care va fi apelată atunci când utilizatorul apasă butonul "My Location"
+        function getUserLocation() {
+            // Verifică dacă navigator.geolocation este disponibil în browser-ul utilizatorului
+            if (navigator.geolocation) {
+                // Solicită locația utilizatorului
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    // Extrage coordonatele latitudine și longitudine
+                    var userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+
+                    // Afișează locația utilizatorului pe hartă
+                    map.setCenter(userLocation);
+
+                    // Adaugă un marcator pentru locația utilizatorului
+                    var userMarker = new google.maps.Marker({
+                        position: userLocation,
+                        map: map,
+                        title: 'My Location'
+                    });
+                }, function (error) {
+                    // În cazul în care apare o eroare la obținerea locației
+                    console.error("Eroare la obținerea locației:", error);
+                });
+            } else {
+                // În cazul în care navigator.geolocation nu este disponibil
+                console.error("Geolocation nu este suportat de browser-ul utilizatorului");
+            }
+        }
+
+        // Functia care va fi apelata atunci cand utilizatorul apasa butonul "Paper"
+        function getPaperLocation() {
+            // Defineste locatiile pentru hartie
+            var paperLocations = [
+                { lat: 44.43225, lng: 26.10626 },
+                { lat: 44.3821351, lng: 26.1534615 }
+                // Adaugati alte locatii pentru hartie aici, daca este nevoie
+            ];
+
+            // Afiseaza locatiile pe harta
+            paperLocations.forEach(function (location) {
+                var paperMarker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    title: 'Paper'
+                });
+            });
+        }
+
+
+        // Functia care va fi apelata atunci cand utilizatorul apasa butonul "Plastic"
+        function getPlasticLocation() {
+            // Defineste locatiile pentru hartie
+            var plasticLocations = [
+                { lat: 44.4083471, lng: 26.1399083 },
+                { lat: 44.4089996, lng: 26.1969409 }
+                // Adaugati alte locatii pentru hartie aici, daca este nevoie
+            ];
+
+            // Afiseaza locatiile pe harta
+            plasticLocations.forEach(function (location) {
+                var plasticMarker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    title: 'Plastic'
+                });
+            });
+        }
+
+        // Functia care va fi apelata atunci cand utilizatorul apasa butonul "Glass"
+        function getGlassLocation() {
+            // Defineste locatiile pentru hartie
+            var glassLocations = [
+                { lat: 44.4636665, lng: 26.109916 },
+                { lat: 44.4759096, lng: 26.1790872 }
+                // Adaugati alte locatii pentru hartie aici, daca este nevoie
+            ];
+
+            // Afiseaza locatiile pe harta
+            glassLocations.forEach(function (location) {
+                var glassMarker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    title: 'Glass'
+                });
+            });
+        }
+
+
+        // Functia care va fi apelata atunci cand utilizatorul apasa butonul "Metal"
+        function getMetalLocation() {
+            // Defineste locatiile pentru hartie
+            var metalLocations = [
+                { lat: 44.4289447, lng: 26.0351844 },
+                { lat: 44.3843606, lng: 26.0595703 }
+                // Adaugati alte locatii pentru hartie aici, daca este nevoie
+            ];
+
+            // Afiseaza locatiile pe harta
+            metalLocations.forEach(function (location) {
+                var metalMarker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    title: 'Metal'
+                });
+            });
+        }
+
+        // Funcția de inițializare a hărții
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 44.43225, lng: 26.10626 }, //bucuresti centru
+                zoom: 12
+            });
+        }
+
+        // Apelează funcția de inițializare a hărții când se încarcă pagina
+        window.onload = function () {
+            initMap();
+
+            // Adaugă un eveniment de click pentru butonul "My Location"
+            document.getElementById('myLocationButton').addEventListener('click', function () {
+                getUserLocation();
+            });
+
+            // Adaugă un eveniment de click pentru butonul "Paper"
+            document.getElementById('paperButton').addEventListener('click', function () {
+                getPaperLocation();
+            });
+            // Adaugă un eveniment de click pentru butonul "Paper"
+            document.getElementById('plasticButton').addEventListener('click', function () {
+                getPlasticLocation();
+            });
+            // Adaugă un eveniment de click pentru butonul "Paper"
+            document.getElementById('glassButton').addEventListener('click', function () {
+                getGlassLocation();
+            });
+            // Adaugă un eveniment de click pentru butonul "Paper"
+            document.getElementById('metalButton').addEventListener('click', function () {
+                getMetalLocation();
+            });
+        };
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAELmgwwCD6Zk66yg1D963hesjNg7IadMY&callback=initMap" async defer></script>
 }

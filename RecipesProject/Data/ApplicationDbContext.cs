@@ -12,5 +12,9 @@ namespace RecipesProject.Data
         }
 
         public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<RecyclingCenter> RecyclingCenters { get; set; }
+        public DbSet<List> Lists { get; set; }
+        public DbSet<Item> Items { get; set; }
+
     }
 }
