@@ -23,7 +23,7 @@ else
     ViewData["Title"] = "Generated Recipe";
 }
 
-<h1>Generated Recipe</h1>
+
 @if (ViewData["Recipe"] != null)
 {
     <pre>@Html.Raw(ViewData["Recipe"])</pre>
@@ -31,4 +31,16 @@ else
 else
 {
     <p>No response generated.</p>
+}
+
+@if (ViewData["Image"] != null)
+{
+    <div>
+
+        <img src="@ViewData["Image"]" alt="Generated Image" style="width: 450px; height: auto;" />
+    </div>
+}
+else
+{
+    <p>No image generated.</p>
 }
