@@ -1,25 +1,4 @@
-﻿@* @{
-    ViewData["Title"] = "Generated Recipe";
-}
-
-<h1>Generated Recipe</h1>
-@if (ViewData["Response"] != null)
-{
-    <p>@ViewData["Response"]</p>
-}
-else
-{
-    <p>No response generated.</p>
-}
-
-<form asp-controller="Recipe" asp-action="Create" method="post">
-    <input type="hidden" name="text" value="@ViewData["Response"]" />
-    <button type="submit" class="btn btn-primary">Save Recipe</button>
-</form>
-*@ 
-
-
-@{
+﻿@{
     ViewData["Title"] = "Generated Recipe";
 }
 
@@ -33,6 +12,12 @@ else
     <p>No response generated.</p>
 }
 
+<br />
+<form asp-controller="Generate" asp-action="Save" method="post">
+    <input type="hidden" name="recipeText" value="@ViewData["Recipe"]" />
+    <button type="submit">Salvează Rețeta</button>
+</form>
+<br />
 @if (ViewData["Image"] != null)
 {
     <div>

@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using RecipesProject.Data;
+using RecipesProject.Helpers;
+using RecipesProject.Models;
 using System.ComponentModel;
 using System.Diagnostics;
 
@@ -14,10 +17,12 @@ namespace RecipesProject.Controllers
         }
 
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public GenerateController(ApplicationDbContext context)
+        public GenerateController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [HttpPost]
@@ -46,6 +51,32 @@ namespace RecipesProject.Controllers
 
             return View("GeneratedRecipe", ViewData);
         }
+
+
+
+        [HttpPost]
+        public IActionResult Save(string recipeText)
+        {
+            var userId = _userManager.GetUserId(User); // Obține UserId-ul utilizatorului curent
+
+            // Crează o nouă instanță a modelului Recipe și salvează textul rețetei în câmpul corespunzător
+            var newRecipe = new Recipe { Description = recipeText, UserId = userId };
+            // Adaugă rețeta nouă în contextul bazei de date și salvează modificările
+            _context.Recipes.Add(newRecipe);
+            _context.SaveChanges();
+
+            // Redirectează către acțiunea "Recipe" care afișează toate rețetele
+            return RedirectToAction("Index", "Recipe");
+        }
+
+        public IActionResult Favorite()
+        {
+            List<string> savedRecipes = HttpContext.Session.GetObject<List<string>>("SavedRecipes");
+            ViewBag.Recipes = savedRecipes ?? new List<string>();
+            return View("Index", "Recipe");
+        }
+
+
 
         private string GetCompletionFromPythonScript(List<string> ingredients)
         {

@@ -7,7 +7,7 @@ openai.api_key = 'sk-proj-BhwfasWOa85jqMZvwjXfT3BlbkFJFLgulPdqlC6fMfvEzHMW'
 
 # Definirea funcției pentru generarea imaginii de la API-ul OpenAI
 def generate_image(recipe):
-    prompt = f"Genereaza o imagine cu acest preparat: {recipe}"
+    prompt = f"Genereaza o imagine cu acest preparat, proaspat pregatit, cat mai apetisant: {recipe}"
     response = openai.Image.create(
         model="dall-e-3",
         prompt=prompt,
@@ -15,8 +15,6 @@ def generate_image(recipe):
         size="1024x1024"
     )
     return response['data'][0]['url']
-
-
 
 
 if __name__ == "__main__":

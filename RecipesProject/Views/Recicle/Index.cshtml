@@ -6,16 +6,21 @@
 <button id="myLocationButton" class="btn btn-primary">My Location</button>
 <br />
 <br />
-<button id="paperButton" class="btn btn-primary">Paper</button>
-<button id="plasticButton" class="btn btn-primary">Plastic</button>
-<button id="glassButton" class="btn btn-primary">Glass</button>
-<button id="metalButton" class="btn btn-primary">Metal</button>
+<button id="paperButton" class="btn" style="background-color: royalblue; color: black;">Paper</button>
+<button id="plasticButton" class="btn" style="background-color: darkkhaki; color: black;">Plastic</button>
+<button id="glassButton" class="btn" style="background-color: mediumseagreen; color: black;">Glass</button>
+<button id="metalButton" class="btn" style="background-color: lightcoral; color: black;">Metal</button>
+
 <br />
 <div id="map" style="height: 400px;"></div>
 
 @section scripts {
     <script>
         var map;
+        var paperMarkers = []; // Array pentru a retine marker-urile pentru hartie
+        var plasticMarkers = []; // Array pentru a retine marker-urile pentru plastic
+        var glassMarkers = []; // Array pentru a retine marker-urile pentru sticla
+        var metalMarkers = []; // Array pentru a retine marker-urile pentru metal
 
         // Funcția care va fi apelată atunci când utilizatorul apasă butonul "My Location"
         function getUserLocation() {
@@ -50,6 +55,7 @@
 
         // Functia care va fi apelata atunci cand utilizatorul apasa butonul "Paper"
         function getPaperLocation() {
+            clearMarkersPaper();
             // Defineste locatiile pentru hartie
             var paperLocations = [
                 { lat: 44.43225, lng: 26.10626 },
@@ -62,19 +68,21 @@
                 var paperMarker = new google.maps.Marker({
                     position: location,
                     map: map,
-                    title: 'Paper'
+                    title: 'Paper',
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
                 });
+                paperMarkers.push(paperMarker);
             });
         }
 
-
         // Functia care va fi apelata atunci cand utilizatorul apasa butonul "Plastic"
         function getPlasticLocation() {
-            // Defineste locatiile pentru hartie
+            clearMarkersPlastic();
+            // Defineste locatiile pentru plastic
             var plasticLocations = [
                 { lat: 44.4083471, lng: 26.1399083 },
                 { lat: 44.4089996, lng: 26.1969409 }
-                // Adaugati alte locatii pentru hartie aici, daca este nevoie
+                // Adaugati alte locatii pentru plastic aici, daca este nevoie
             ];
 
             // Afiseaza locatiile pe harta
@@ -82,18 +90,21 @@
                 var plasticMarker = new google.maps.Marker({
                     position: location,
                     map: map,
-                    title: 'Plastic'
+                    title: 'Plastic',
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
                 });
+                plasticMarkers.push(plasticMarker);
             });
         }
 
         // Functia care va fi apelata atunci cand utilizatorul apasa butonul "Glass"
         function getGlassLocation() {
-            // Defineste locatiile pentru hartie
+            clearMarkersGlass();
+            // Defineste locatiile pentru sticla
             var glassLocations = [
                 { lat: 44.4636665, lng: 26.109916 },
                 { lat: 44.4759096, lng: 26.1790872 }
-                // Adaugati alte locatii pentru hartie aici, daca este nevoie
+                // Adaugati alte locatii pentru sticla aici, daca este nevoie
             ];
 
             // Afiseaza locatiile pe harta
@@ -101,19 +112,21 @@
                 var glassMarker = new google.maps.Marker({
                     position: location,
                     map: map,
-                    title: 'Glass'
+                    title: 'Glass',
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
                 });
+                glassMarkers.push(glassMarker);
             });
         }
 
-
         // Functia care va fi apelata atunci cand utilizatorul apasa butonul "Metal"
         function getMetalLocation() {
-            // Defineste locatiile pentru hartie
+            clearMarkersMetal();
+            // Defineste locatiile pentru metal
             var metalLocations = [
                 { lat: 44.4289447, lng: 26.0351844 },
                 { lat: 44.3843606, lng: 26.0595703 }
-                // Adaugati alte locatii pentru hartie aici, daca este nevoie
+                // Adaugati alte locatii pentru metal aici, daca este nevoie
             ];
 
             // Afiseaza locatiile pe harta
@@ -121,15 +134,17 @@
                 var metalMarker = new google.maps.Marker({
                     position: location,
                     map: map,
-                    title: 'Metal'
+                    title: 'Metal',
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
                 });
+                metalMarkers.push(metalMarker);
             });
         }
 
         // Funcția de inițializare a hărții
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 44.43225, lng: 26.10626 }, //bucuresti centru
+                center: { lat: 44.43225, lng: 26.10626 }, // Bucuresti centru
                 zoom: 12
             });
         }
@@ -145,21 +160,70 @@
 
             // Adaugă un eveniment de click pentru butonul "Paper"
             document.getElementById('paperButton').addEventListener('click', function () {
-                getPaperLocation();
+                if (paperMarkers.length > 0) {
+                    clearMarkersPaper();
+                } else {
+                    getPaperLocation();
+                }
             });
-            // Adaugă un eveniment de click pentru butonul "Paper"
+
+            // Adaugă un eveniment de click pentru butonul "Plastic"
             document.getElementById('plasticButton').addEventListener('click', function () {
-                getPlasticLocation();
+                if (plasticMarkers.length > 0) {
+                    clearMarkersPlastic();
+                } else {
+                    getPlasticLocation();
+                }
             });
-            // Adaugă un eveniment de click pentru butonul "Paper"
+
+            // Adaugă un eveniment de click pentru butonul "Glass"
             document.getElementById('glassButton').addEventListener('click', function () {
-                getGlassLocation();
+                if (glassMarkers.length > 0) {
+                    clearMarkersGlass();
+                } else {
+                    getGlassLocation();
+                }
             });
-            // Adaugă un eveniment de click pentru butonul "Paper"
+
+            // Adaugă un eveniment de click pentru butonul "Metal"
             document.getElementById('metalButton').addEventListener('click', function () {
-                getMetalLocation();
+                if (metalMarkers.length > 0) {
+                    clearMarkersMetal();
+                } else {
+                    getMetalLocation();
+                }
             });
         };
+
+        // Functie pentru a sterge toate marker-urile de pe harta
+        function clearMarkersPaper() {
+            paperMarkers.forEach(function (marker) {
+                marker.setMap(null);
+            });
+            paperMarkers = []; // Goleste array-ul de marker-e
+        }
+
+        function clearMarkersPlastic() {
+            plasticMarkers.forEach(function (marker) {
+                marker.setMap(null);
+            });
+            plasticMarkers = []; // Goleste array-ul de marker-e
+        }
+
+        function clearMarkersGlass() {
+            glassMarkers.forEach(function (marker) {
+                marker.setMap(null);
+            });
+            glassMarkers = []; // Goleste array-ul de marker-e
+        }
+
+        function clearMarkersMetal() {
+            metalMarkers.forEach(function (marker) {
+                marker.setMap(null);
+            });
+            metalMarkers = []; // Goleste array-ul de marker-e
+        }
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAELmgwwCD6Zk66yg1D963hesjNg7IadMY&callback=initMap" async defer></script>
 }

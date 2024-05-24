@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|c:\\users\\cosmi\\desktop\\licenta\\recipesproject\\licenta\\recipesproject\\views\\generate\\generatedrecipe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|solutionrelative:recipesproject\\views\\generate\\generatedrecipe.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|c:\\users\\cosmi\\desktop\\licenta\\recipesproject\\licenta\\recipesproject\\views\\recicle\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|solutionrelative:recipesproject\\views\\recicle\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|c:\\users\\cosmi\\desktop\\licenta\\recipesproject\\licenta\\recipesproject\\controllers\\generatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|solutionrelative:recipesproject\\controllers\\generatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|c:\\users\\cosmi\\desktop\\licenta\\recipesproject\\licenta\\recipesproject\\phythonscripts\\imagescript.py||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|solutionrelative:recipesproject\\phythonscripts\\imagescript.py||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|c:\\users\\cosmi\\desktop\\licenta\\recipesproject\\licenta\\recipesproject\\views\\generate\\generate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|solutionrelative:recipesproject\\views\\generate\\generate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|c:\\users\\cosmi\\desktop\\licenta\\recipesproject\\licenta\\recipesproject\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2764349-5EB0-4F92-8541-295C621DC45C}|RecipesProject\\RecipesProject.csproj|solutionrelative:recipesproject\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 143,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ImageScript.py",
-              "DocumentMoniker": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\PhythonScripts\\ImageScript.py",
-              "RelativeDocumentMoniker": "RecipesProject\\PhythonScripts\\ImageScript.py",
-              "ToolTip": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\PhythonScripts\\ImageScript.py",
-              "RelativeToolTip": "RecipesProject\\PhythonScripts\\ImageScript.py",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
-              "WhenOpened": "2024-05-24T12:49:28.483Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GeneratedRecipe.cshtml",
-              "DocumentMoniker": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Views\\Generate\\GeneratedRecipe.cshtml",
-              "RelativeDocumentMoniker": "RecipesProject\\Views\\Generate\\GeneratedRecipe.cshtml",
-              "ToolTip": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Views\\Generate\\GeneratedRecipe.cshtml*",
-              "RelativeToolTip": "RecipesProject\\Views\\Generate\\GeneratedRecipe.cshtml*",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAQwCcAAABMAAAA",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Views\\Recicle\\Index.cshtml",
+              "RelativeDocumentMoniker": "RecipesProject\\Views\\Recicle\\Index.cshtml",
+              "ToolTip": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Views\\Recicle\\Index.cshtml*",
+              "RelativeToolTip": "RecipesProject\\Views\\Recicle\\Index.cshtml*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAOUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-22T18:20:59.294Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Generate.cshtml",
-              "DocumentMoniker": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Views\\Generate\\Generate.cshtml",
-              "RelativeDocumentMoniker": "RecipesProject\\Views\\Generate\\Generate.cshtml",
-              "ToolTip": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Views\\Generate\\Generate.cshtml",
-              "RelativeToolTip": "RecipesProject\\Views\\Generate\\Generate.cshtml",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAAAC8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-23T11:36:13.778Z",
+              "WhenOpened": "2024-05-24T16:11:56.471Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GenerateController.cs",
-              "DocumentMoniker": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Controllers\\GenerateController.cs",
-              "RelativeDocumentMoniker": "RecipesProject\\Controllers\\GenerateController.cs",
-              "ToolTip": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Controllers\\GenerateController.cs",
-              "RelativeToolTip": "RecipesProject\\Controllers\\GenerateController.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAqwCwAAAAMAAAA",
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "RecipesProject\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "RecipesProject\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T18:07:36.725Z",
+              "WhenOpened": "2024-05-24T15:45:12.842Z",
               "EditorCaption": ""
             }
           ]
