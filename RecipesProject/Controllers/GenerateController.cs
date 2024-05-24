@@ -1,17 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using RecipesProject.Data;
-using RecipesProject.Helpers;
-using RecipesProject.Models;
+using System.ComponentModel;
 using System.Diagnostics;
-/*using System.IO;
-using System;*/
 
 namespace RecipesProject.Controllers
 {
     public class GenerateController : Controller
     {
-
+        
         public IActionResult Generate()
         {
             return View("Generate");
@@ -25,81 +21,77 @@ namespace RecipesProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Generate(string ingredient1, string ingredient2, string ingredient3)
+        public IActionResult Generate(List<string> ingredients)
         {
-            string response = GetCompletionFromPythonScript(ingredient1, ingredient2, ingredient3);
-            ViewData["Response"] = response;
+           /* if (ingredients.Count < 3)
+            {
+                ModelState.AddModelError(string.Empty, "Please provide at least 2 ingredients.");
+                return View("Generate");
+            }*/
+
+            string response = GetCompletionFromPythonScript(ingredients);
+            if (string.IsNullOrEmpty(response))
+            {
+                // ModelState.AddModelError("", "Failed to generate recipe.");
+                ViewData["Recipe"] = "RESPONSE E NULL";
+                return View("GeneratedRecipe", ViewData);
+            }
+
+            ViewData["Recipe"] = response;
+            /*ViewData["ImageUrl"] = response.Item2;*/
             return View("GeneratedRecipe", ViewData);
         }
 
-        /*[HttpPost]
-        public IActionResult Save(string recipeText)
+        private string GetCompletionFromPythonScript(List<string> ingredients)
         {
-            List<string> savedRecipes = HttpContext.Session.GetObject<List<string>>("SavedRecipes");
-            if (savedRecipes == null)
-            {
-                savedRecipes = new List<string>();
-            }
-            savedRecipes.Add(recipeText);
-            HttpContext.Session.SetObject("SavedRecipes", savedRecipes);
-
-            return RedirectToAction("Recipe");
-        }*/
-        [HttpPost]
-        public IActionResult Save(string recipeText)
-        {
-            // Crează o nouă instanță a modelului Recipe și salvează textul rețetei în câmpul corespunzător
-            var newRecipe = new Recipe { Description = recipeText };
-
-            // Adaugă rețeta nouă în contextul bazei de date și salvează modificările
-            _context.Recipes.Add(newRecipe);
-            _context.SaveChanges();
-
-            // Redirectează către acțiunea "Recipe" care afișează toate rețetele
-            return RedirectToAction("Index", "Recipe");
-        }
-
-        public IActionResult Favorite()
-        {
-            List<string> savedRecipes = HttpContext.Session.GetObject<List<string>>("SavedRecipes");
-            ViewBag.Recipes = savedRecipes ?? new List<string>();
-            return View("Index", "Recipe");
-        }
-
-        private string GetCompletionFromPythonScript(string ingredient1, string ingredient2, string ingredient3)
-        {
+            /*string recipeText = string.Empty;
+            string imageUrl = string.Empty;*/
             string result = string.Empty;
 
-            // Specificarea căii către interpreterul Python și scriptul nostru
-            string pythonPath = "C:\\Users\\cosmi\\AppData\\Local\\Programs\\Python\\Python310\\python.exe"; // Înlocuiește cu calea către interpreterul Python
-            string scriptPath = "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\PhythonScripts\\ApiScript.py"; // Înlocuiește cu calea către scriptul Python
+            /*  string pythonPath = "C:\\Users\\cosmi\\AppData\\Local\\Programs\\Python\\Python310\\python.exe";
+              string scriptPath = "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\PhythonScripts\\ApiScript.py";*/
+            //string envPath = "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\env";
+            //string pythonPath = "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\env\\Scripts\\python.exe"; 
+            string pythonPath = "C:\\Python312\\python.exe";
+            string scriptPath = "C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\PhythonScripts\\ApiScript.py";
+            string args = string.Join(" ", ingredients);
+            string cmd = $"{scriptPath} {args}";
 
-            // Construirea comenzii pentru a rula scriptul Python
-            string arguments = $"{scriptPath} {ingredient1} {ingredient2} {ingredient3}";
-            ProcessStartInfo startInfo = new ProcessStartInfo
+            ProcessStartInfo start = new ProcessStartInfo
             {
                 FileName = pythonPath,
-                Arguments = arguments,
+                /* Arguments = $"/c \"{pythonPath} {cmd}\"",*/
+                Arguments = cmd,
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true
             };
 
-            // Pornirea procesului și citirea rezultatului din ieșirea standard
-            using (Process process = Process.Start(startInfo))
+            using (Process process = Process.Start(start))
             {
                 if (process != null)
                 {
                     using (StreamReader reader = process.StandardOutput)
                     {
-                        result = reader.ReadToEnd();
+                        
+                         result = reader.ReadToEnd();
+                        // Găsește indexul unde începe cuvântul "IMAGE"
+                        //int imageIndex = result.IndexOf("IMAGE");
+
+                        // Extrage tot textul până la cuvântul "IMAGE"
+                        // string textBeforeImage = result;
+
+                        // Caută indexul unde începe "https://"
+                        //int urlIndex = result.IndexOf("https://", imageIndex);
+
+                        // Extrage URL-ul care începe de la "https://"
+                        //string imageUrl = reader.ReadToEnd();
                     }
                 }
             }
-
+           
             return result;
+
         }
     }
 }
-
-

@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using RecipesProject.Data;
 using RecipesProject.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace RecipesProject.Controllers
 {
+    [Authorize]
     public class RecipeController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -17,35 +20,38 @@ namespace RecipesProject.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            // Afișează toate rețetele salvate din baza de date
-            var recipes = _context.Recipes.ToList();
+            var userId = _userManager.GetUserId(User);
+
+            var recipes = await _context.Recipes.Where(recipe => recipe.UserId == userId).ToListAsync();
             return View(recipes);
         }
 
         [HttpPost]
-        public IActionResult Create(string text)
+        public async Task<IActionResult> Create(string text)
         {
-            // Crează o nouă instanță a modelului Recipe și salvează textul rețetei în câmpul corespunzător
-            var newRecipe = new Recipe { Description = text };
+            var userId = _userManager.GetUserId(User);
 
+            // Crează o nouă instanță a modelului Recipe și salvează textul rețetei în câmpul corespunzător
+            var newRecipe = new Recipe { Description = text, UserId = userId };
+            
             // Adaugă rețeta nouă în contextul bazei de date și salvează modificările
             _context.Recipes.Add(newRecipe);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             // Redirectează către acțiunea "Index" care afișează toate rețetele
             return RedirectToAction("Index");
         }
 
-        // Acțiune pentru a afișa detalii despre o rețetă
+/*        // Acțiune pentru a afișa detalii despre o rețetă
         public IActionResult Details(int id)
         {
             var recipe = _context.Recipes.FirstOrDefault(r => r.Id == id);
             return View(recipe);
         }
-
-        // Acțiune pentru a actualiza o rețetă existentă
+*/
+/*        // Acțiune pentru a actualiza o rețetă existentă
         [HttpPost]
         public IActionResult Update(Recipe recipe)
         {
@@ -53,14 +59,14 @@ namespace RecipesProject.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        // Acțiune pentru a șterge o rețetă
+*/
+/*        // Acțiune pentru a șterge o rețetă
         public IActionResult Delete(int id)
         {
             var recipe = _context.Recipes.FirstOrDefault(r => r.Id == id);
             _context.Recipes.Remove(recipe);
             _context.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
     }
 }

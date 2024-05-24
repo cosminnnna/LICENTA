@@ -1,21 +1,98 @@
-﻿@{
-    ViewData["Title"] = "Generate Recipe";
-}
-
+﻿@* 
 <h1>Generate Recipe</h1>
 
-<form asp-controller="Generate" asp-action="Generate" method="post">
-    <div class="form-group">
-        <label for="ingredient1">Ingredient 1:</label>
-        <input type="text" class="form-control" id="ingredient1" name="ingredient1">
+<form id="generateForm" asp-controller="Generate" asp-action="Generate" method="post">
+    <div id="ingredientFields">
+        <div class="form-group">
+            <label for="ingredient1">Ingredient 1:</label>
+            <input type="text" class="form-control" name="ingredients[0]">
+        </div>
+        <div class="form-group">
+            <label for="ingredient2">Ingredient 2:</label>
+            <input type="text" class="form-control" name="ingredients[1]">
+        </div>
+        <div class="form-group">
+            <label for="ingredient3">Ingredient 3:</label>
+            <input type="text" class="form-control" name="ingredients[2]">
+        </div>
     </div>
-    <div class="form-group">
-        <label for="ingredient2">Ingredient 2:</label>
-        <input type="text" class="form-control" id="ingredient2" name="ingredient2">
-    </div>
-    <div class="form-group">
-        <label for="ingredient3">Ingredient 3:</label>
-        <input type="text" class="form-control" id="ingredient3" name="ingredient3">
-    </div>
+    <br />
+
+    <button id="addIngredient" type="button" class="btn btn-secondary">Add</button>
+    <br />
     <button type="submit" class="btn btn-primary">Generate Now</button>
 </form>
+
+<script>
+    document.getElementById("addIngredient").addEventListener("click", function () {
+        var ingredientFields = document.getElementById("ingredientFields");
+        var count = ingredientFields.children.length;
+        if (count < 10) { 
+            var newIngredientField = document.createElement("div");
+            newIngredientField.classList.add("form-group");
+            var label = document.createElement("label");
+            label.textContent = "Ingredient " + (count + 1) + ":";
+            var input = document.createElement("input");
+            input.type = "text";
+            input.classList.add("form-control");
+            input.name = "ingredients[" + count + "]";
+           // input.required = true;
+            newIngredientField.appendChild(label);
+            newIngredientField.appendChild(input);
+            ingredientFields.appendChild(newIngredientField);
+        }
+    });
+</script>
+ *@
+
+@{
+    ViewData["Title"] = "Generate Recipe";
+}
+<form id="generateForm" asp-controller="Generate" asp-action="Generate" method="post">
+    <div id="ingredientFields">
+        <div class="form-group">
+            <label for="ingredient1">Ingredient 1:</label>
+            <input type="text" class="form-control" id="ingredient1" name="ingredients[0]">
+        </div>
+        <div class="form-group">
+            <label for="ingredient2">Ingredient 2:</label>
+            <input type="text" class="form-control" id="ingredient2" name="ingredients[1]">
+        </div>
+        <div class="form-group">
+            <label for="ingredient3">Ingredient 3:</label>
+            <input type="text" class="form-control" id="ingredient3" name="ingredients[2]">
+        </div>
+    </div>
+    <button type="button" id="addIngredient" class="btn btn-secondary">Add</button>
+    <button type="submit" class="btn btn-primary">Generate Now</button>
+</form>
+
+
+<script>
+    document.getElementById('generateForm').onsubmit = function (event) {
+        var inputs = document.querySelectorAll('#ingredientFields input[type="text"]');
+        var filledCount = 0;
+
+        inputs.forEach(function (input) {
+            if (input.value.trim() !== '') {
+                filledCount++;
+            }
+        });
+
+        if (filledCount < 3) {
+            event.preventDefault(); // Opriți trimiterea formularului
+            alert('Please fill out at least three ingredients before submitting.');
+        }
+    };
+
+    document.getElementById('addIngredient').addEventListener('click', function () {
+        var ingredientFields = document.getElementById('ingredientFields');
+        var count = ingredientFields.querySelectorAll('input').length;
+        if (count < 10) {
+            var newField = document.createElement('div');
+            newField.className = 'form-group';
+            newField.innerHTML = `<label>Ingredient ${count + 1}:</label><input type="text" class="form-control" name="ingredients[${count}]">`;
+            ingredientFields.appendChild(newField);
+        }
+    });
+</script>
