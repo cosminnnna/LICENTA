@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RecipesProject.Data;
@@ -6,12 +7,9 @@ using RecipesProject.Models;
 
 namespace RecipesProject.Controllers
 {
+    [Authorize]
     public class ListController : Controller
     {
-        /*        public IActionResult Index()
-                {
-                    return View();
-                }*/
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
@@ -58,6 +56,32 @@ namespace RecipesProject.Controllers
             if (item != null)
             {
                 item.IsChecked = !item.IsChecked;
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            var item = await _context.Items.FindAsync(id);
+            if (item != null)
+            {
+                _context.Items.Remove(item);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteList(int id)
+        {
+            var list = await _context.Lists.Include(l => l.Items).FirstOrDefaultAsync(l => l.Id == id);
+            if (list != null)
+            {
+                _context.Items.RemoveRange(list.Items);
+                _context.Lists.Remove(list);
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction(nameof(Index));

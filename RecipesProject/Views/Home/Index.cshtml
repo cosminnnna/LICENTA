@@ -11,6 +11,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>Welcome to Recipes Project</h1>
+<h1>Welcome to Recipes Project</h1> 
+
+<style>
+    body {
+        background-image: url('C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Views\\Home\\fundal2.jpg'); /* Înlocuiește 'caminul_catre_imagine.jpg' cu calea către imaginea ta */
+        background-size: cover; /* Aceasta va face ca imaginea să se întindă pe întreaga suprafață a fundalului */
+        background-position: center; /* Aceasta va centra imaginea pe fundal */
+    }
+</style>
 
 <a asp-controller="Generate" asp-action="Generate" class="btn btn-primary">Generate Recipe</a>

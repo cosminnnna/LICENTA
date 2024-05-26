@@ -1,4 +1,4 @@
-﻿@model List<string>
+﻿@* @model List<string>
 
 @{
     ViewData["Title"] = "News";
@@ -27,5 +27,50 @@
             </div>
         }
     </div>
+
+
+    <h2>Adăugare link video</h2>
+
+    <form asp-controller="Video" asp-action="AddLink">
+        <div class="form-group">
+            <label for="newLink">URL nou:</label>
+            <input type="text" class="form-control" id="newLink" name="newLink">
+        </div>
+        <button type="submit" class="btn btn-primary">Adăugare</button>
+    </form>
 </body>
 </html>
+ *@
+@model List<RecipesProject.Models.Video>
+
+<h1>Listă de linkuri video</h1>
+
+<div class="row">
+    @foreach (var video in Model)
+    {
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg" alt="Thumbnail">
+                <div class="caption">
+                    <h3>Link:</h3>
+                    <p>@video.Link</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@* Formular pentru adăugarea de noi linkuri video *@
+
+@using (Html.BeginForm("AddVideo", "Video", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label class="control-label">Link:</label>
+        <input type="text" name="Link" class="form-control" required>
+        @Html.ValidationMessageFor(model => model[0].Link, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Adaugă videoclip</button>
+}

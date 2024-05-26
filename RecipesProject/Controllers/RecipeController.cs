@@ -8,16 +8,17 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace RecipesProject.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "User,Admin")]
     public class RecipeController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
-
-        public RecipeController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public RecipeController(ApplicationDbContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<IActionResult> Index()

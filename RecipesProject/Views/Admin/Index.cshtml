@@ -1,0 +1,58 @@
+﻿@* @{
+    ViewData["Title"] = "Users";
+}
+<h1>Utilizatori</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @if (ViewData["Users"] != null )
+        {
+            <pre>@Html.Raw(ViewData["Users"])</pre>
+        }
+        else
+        {
+            <p>No response generated.</p>
+        }
+    </tbody>
+</table>
+ *@
+@{
+    ViewData["Title"] = "Users";
+    var users = ViewData["Users"] as List<Microsoft.AspNetCore.Identity.IdentityUser>;
+}
+
+<h1>Utilizatori</h1>
+
+@if (users != null && users.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in users)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (ViewData["Users"] is string)
+{
+    <p>@ViewData["Users"]</p>
+}
+else
+{
+    <p>No response generated.</p>
+}

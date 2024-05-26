@@ -15,6 +15,12 @@
         <input type="text" name="text" placeholder="Adaugă element nou" />
         <button type="submit">Adaugă</button>
     </form>
+
+    <form asp-action="DeleteList" method="post" style="display:inline;">
+        <input type="hidden" name="id" value="@list.Id" />
+        <button type="submit">Șterge lista</button>
+    </form>
+
     <ul>
         @foreach (var item in list.Items)
         {
@@ -24,6 +30,12 @@
                     <input type="checkbox" onchange="this.form.submit();" @(item.IsChecked ? "checked" : "") />
                     @Html.DisplayFor(modelItem => item.Text)
                 </form>
+
+                <form asp-action="DeleteItem" method="post" style="display:inline;">
+                    <input type="hidden" name="id" value="@item.Id" />
+                    <button type="submit">Șterge</button>
+                </form>
+
             </li>
         }
     </ul>

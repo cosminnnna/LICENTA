@@ -3,21 +3,6 @@
 }
 
 
-@if (ViewData["Recipe"] != null)
-{
-    <pre>@Html.Raw(ViewData["Recipe"])</pre>
-}
-else
-{
-    <p>No response generated.</p>
-}
-
-<br />
-<form asp-controller="Generate" asp-action="Save" method="post">
-    <input type="hidden" name="recipeText" value="@ViewData["Recipe"]" />
-    <button type="submit">Salvează Rețeta</button>
-</form>
-<br />
 @if (ViewData["Image"] != null)
 {
     <div>
@@ -29,3 +14,20 @@ else
 {
     <p>No image generated.</p>
 }
+<br />
+
+@if (ViewData["Recipe"] != null)
+{
+    <pre>@Html.Raw(ViewData["Recipe"])</pre>
+}
+else
+{
+    <p>No response generated.</p>
+}
+
+
+<form asp-controller="Generate" asp-action="Save" method="post">
+    <input type="hidden" name="recipeText" value="@ViewData["Recipe"]" />
+    <button type="submit">Salvează Rețeta</button>
+</form>
+<br />
