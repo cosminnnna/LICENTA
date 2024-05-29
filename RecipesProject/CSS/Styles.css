@@ -1,0 +1,16 @@
+﻿/* Media query pentru ecrane mici (de exemplu, mai mici de 768px) */
+@media (max-width: 768px) {
+    .btn-primary {
+        font-size: 18px; /* Redu dimensiunea textului butonului pentru ecrane mici */
+        margin: 10px; /* Redu spațiul în jurul butonului pentru ecrane mici */
+    }
+}
+
+/* Media query pentru ecrane mici (de exemplu, mai mici de 768px) */
+@media (max-width: 768px) {
+    body {
+        background-size: contain; /* Redimensionează imaginea pentru a se potrivi conținutului */
+        background-position: top; /* Poziționează imaginea în partea de sus */
+    }
+}
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');

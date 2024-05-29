@@ -1,18 +1,28 @@
-﻿@model IEnumerable<List>
+﻿@* @model IEnumerable<List>
 
 <h2>Liste de cumpărături</h2>
 
+<style>
+    .shopping-list {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+</style>
 <form asp-action="AddList" method="post">
-    <input type="text" name="name" placeholder="Nume lista nouă" />
+    <input type="text" name="name" placeholder="Title" />
     <button type="submit">Adaugă listă</button>
 </form>
 
 @foreach (var list in Model)
 {
+ <div class="shopping-list"> <!-- Adaugă clasa CSS aici -->
     <h3>@list.Name</h3>
     <form asp-action="AddItem" method="post">
         <input type="hidden" name="listId" value="@list.Id" />
-        <input type="text" name="text" placeholder="Adaugă element nou" />
+        <input type="text" name="text" placeholder="item" />
         <button type="submit">Adaugă</button>
     </form>
 
@@ -33,10 +43,162 @@
 
                 <form asp-action="DeleteItem" method="post" style="display:inline;">
                     <input type="hidden" name="id" value="@item.Id" />
-                    <button type="submit">Șterge</button>
+                        <button type="submit">🗑</button>
                 </form>
 
             </li>
         }
     </ul>
+  </div>
 }
+ *@
+@model IEnumerable<List>
+
+<div class="text"><h2> Your Shopping Lists</h2></div>
+
+
+<style>
+    /*         font-family: 'Montserrat', sans-serif;
+     */
+    body{
+        background-image: url('https://i.imgur.com/Uojd5x2.jpg');
+        background-size: cover; /* Asigură că imaginea de fundal se întinde pentru a acoperi întreaga suprafață a paginii */
+        background-position: top;
+        background-attachment: fixed; /* Face ca imaginea de fundal să rămână fixă în timpul scroll-ului */
+    }
+    .recipe-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* Spațiu între divuri */
+        font-family: 'Dancing Script', cursive;
+    }
+
+    .text{
+        font-family: 'Dancing Script', cursive;
+        text-align: center;
+        font-size: 70px;
+        color: #003300;
+    }
+
+    .buton{
+        border-radius: 10px;
+        padding: 3px;
+        background-color:antiquewhite;
+        border-color: antiquewhite;
+    }
+
+    .butondel{
+        background-color: #BECFC0;
+
+/*       border: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+ */
+    }
+
+    .shopping-list {
+        border: 1px solid black;
+        border-radius: 5px;
+        padding: 10px;
+        width: calc(33.333% - 20px); /* 3 pe un rând cu spațiu între ele */
+        box-sizing: border-box;
+        background-color: rgba(255, 255, 255, 0.5); /* Fundal alb semi-transparent */
+        border-radius: 10px; /* Rotunjirea colțurilor */
+        border: 1px solid rgba(0, 0, 0, 0.2); /* Bordura semi-transparentă */
+        color: black; /* Culoarea textului */
+    }
+
+        .shopping-list h3 {
+            margin-top: 0;
+        }
+
+        .shopping-list form {
+            margin-bottom: 10px;
+        }
+
+        .shopping-list ul {
+            padding-left: 20px; /* Setează indentarea pentru lista neordonată */
+        }
+
+            .shopping-list ul li {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 5px;
+            }
+
+    .deleteItem {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+    }
+
+        .deleteItem:hover {
+            color: red; /* Opțional: schimbă culoarea la hover */
+        }
+       
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.item-input').forEach(function (input) {
+            input.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Previi comportamentul implicit al Enter-ului
+                    this.form.submit(); // Trimiți formularul
+                }
+            });
+        });
+    });
+</script>
+
+<form asp-action="AddList" method="post">
+    <input type="text" name="name" placeholder="Add List Title" />
+    <button class="buton" type="submit">Add List</button>
+</form>
+<br /><br />
+<div class="recipe-container">
+    @foreach (var list in Model)
+    {
+        <div class="shopping-list">
+            <h3>@list.Name</h3>
+            <form asp-action="AddItem" method="post">
+                <input type="hidden" name="listId" value="@list.Id" />
+                <input type="text" name="text" placeholder="Add Item" class="item-input" />
+              @*   <button type="submit">Adaugă</button> *@
+            </form>
+
+            <form asp-action="DeleteList" method="post" style="display:inline;">
+                <input type="hidden" name="id" value="@list.Id" />
+                <button class="butondel" type="submit">delete list</button>
+            </form>
+
+            <ul>
+                @foreach (var item in list.Items)
+                {
+                    <li>
+                        <form asp-action="ToggleItem" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <label class="custom-checkbox">
+                            <input type="checkbox" onchange="this.form.submit();" @(item.IsChecked ? "checked" : "") />
+                                <span></span>
+                            </label>
+                            @Html.DisplayFor(modelItem => item.Text)
+                        </form>
+
+                        <form asp-action="DeleteItem" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button class="deleteItem" type="submit">❌</button>
+                        </form>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>

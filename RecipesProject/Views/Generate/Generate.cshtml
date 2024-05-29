@@ -1,25 +1,121 @@
 ﻿@{
     ViewData["Title"] = "Generate Recipe";
 }
+<head>
+    <!-- Alte meta taguri și stiluri -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    /* Stilurile pentru imaginea de fundal */
+    body {
+        background-image: url('https://i.imgur.com/MJRYCie.jpg');
+        background-size: cover; /* Asigură că imaginea de fundal se întinde pentru a acoperi întreaga suprafață a paginii */
+        background-position: top;
+        background-attachment: fixed; /* Face ca imaginea de fundal să rămână fixă în timpul scroll-ului */
+    }
+
+    /* Stilurile pentru secțiunile de introducere a ingredientelor */
+    .ingredient-section {
+        align-content: left; /* Aliniază secțiunea la stânga */
+        width: 30%; /* Ocupă jumătate din lățimea paginii */
+        padding-left: 50px; /* Adaugă un spațiu între secțiuni */
+    }
+
+    /* Stilurile pentru câmpurile de introducere a ingredientelor */
+    .form-group {
+        margin-bottom: 20px; /* Adaugă un spațiu între câmpuri */
+
+
+    }
+
+    .form-control {
+        padding: 14px 40px; /* Adaugă un spațiu între secțiuni */
+        background-color: rgba(255, 255, 255, 0.5); /* Fundal alb semi-transparent */
+        border-radius: 10px; /* Rotunjirea colțurilor */
+        border: 1px solid rgba(0, 0, 0, 0.2); /* Bordura semi-transparentă */
+        color: black; /* Culoarea textului */
+    }
+
+    .button-section {
+        margin-top: 20px; /* Spațiu între secțiuni și butoane */
+        text-align: left;
+        padding-left: 60px;
+        border-radius: 25px; /* Margini rotunjite */
+    }
+
+    .title {
+        font-family: 'Dancing Script', cursive;
+        text-align: left;
+        font-size: 60px;
+        color: #003300;
+    }
+
+    .btn-primary{
+       /*  background-color: #003300;  */
+        background-color: darkgreen;
+        /* Fundal alb semi-transparent */
+        border-radius: 10px; /* Rotunjim colțurile pentru un aspect mai plăcut */
+        border-color: rgba(0, 50, 0, 0.6);
+        width: 180px; /* Setează lățimea butonului */
+        height: 60px; /* Setează înălțimea butonului */
+
+    }
+
+        .btn-primary:hover {
+            background-color: rgba(0, 50, 0, 0.6); /* Culoarea de fundal verde închis la hover */
+    }
+    .btn-secondary {
+        width: 50px; /* Setează lățimea butonului */
+        height: 40px; /* Setează înălțimea butonului */
+        background-color: green; /* Culoare de fundal verde */
+        color: white; /* Culoarea textului */
+        border-radius: 40px; /* Rotunjim colțurile pentru un aspect mai plăcut */
+        font-weight: bold; /* Textul va fi bolduit */
+        cursor: pointer; /* Cursorul de mouse */
+        transition: background-color 0.3s, color 0.3s; /* Efect de tranziție pentru schimbarea culorilor */
+        display: inline-flex; /* Flexbox pentru a centra conținutul și menținerea inline */
+        align-items: center; /* Centrează vertical */
+        justify-content: center; /* Centrează orizontal */
+        font-size: 18px; /* Dimensiunea textului */
+        vertical-align: middle; /* Asigură alinierea verticală în linie cu alte elemente */
+    }
+
+        .btn-secondary:hover {
+            background-color: green; /* Culoarea de fundal verde închis la hover */
+        }
+
+    .spacer {
+        height: 200px; /* Înălțimea spațiului gol este egală cu jumătate din înălțimea vizibilă a ferestrei de vizualizare */
+    }
+</style>
+
+<br />
+<div class="title">
+    What ingredients do you have?
+</div>
+<br /><br />
 <form id="generateForm" asp-controller="Generate" asp-action="Generate" method="post">
-    <div id="ingredientFields">
+    <div class="ingredient-section" id="ingredientFields">
         <div class="form-group">
-            <label for="ingredient1">Ingredient 1:</label>
-            <input type="text" class="form-control" id="ingredient1" name="ingredients[0]">
+            <input type="text" class="form-control" id="ingredient1" name="ingredients[0]" placeholder="● ingredient 1">
         </div>
         <div class="form-group">
-            <label for="ingredient2">Ingredient 2:</label>
-            <input type="text" class="form-control" id="ingredient2" name="ingredients[1]">
+            <input type="text" class="form-control" id="ingredient2" name="ingredients[1]" placeholder="● ingredient 2">
         </div>
         <div class="form-group">
-            <label for="ingredient3">Ingredient 3:</label>
-            <input type="text" class="form-control" id="ingredient3" name="ingredients[2]">
+            <input type="text" class="form-control" id="ingredient3" name="ingredients[2]" placeholder="● ingredient 3">
         </div>
     </div>
-    <button type="button" id="addIngredient" class="btn btn-secondary">Add</button>
-    <button type="submit" class="btn btn-primary">Generate Now</button>
-</form>
 
+    <div class="button-section">
+        <!-- Adăugăm un container pentru butoane -->
+        <button type="button" id="addIngredient" class="btn btn-secondary">+</button>
+        <br /><br />
+        <button type="submit" class="btn btn-primary">Find recipe ➤</button>
+    </div>
+</form>
+<div class="spacer"></div> <!-- Adăugare spațiu gol pentru a permite scroll-ul -->
 
 <script>
     document.getElementById('generateForm').onsubmit = function (event) {
@@ -44,8 +140,9 @@
         if (count < 10) {
             var newField = document.createElement('div');
             newField.className = 'form-group';
-            newField.innerHTML = `<label>Ingredient ${count + 1}:</label><input type="text" class="form-control" name="ingredients[${count}]">`;
+            newField.innerHTML = `<input type="text" class="form-control" placeholder=" ● ingredient ${count + 1}" name="ingredients[${count}]">`;
             ingredientFields.appendChild(newField);
         }
     });
 </script>
+<link rel="stylesheet" href="C:\Users\cosmi\Desktop\LICENTA\RecipesProject\LICENTA\RecipesProject\CSS\Styles.css" />

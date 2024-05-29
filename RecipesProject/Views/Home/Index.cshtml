@@ -11,14 +11,70 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>Welcome to Recipes Project</h1> 
-
 <style>
+    /* Stilurile globale */
     body {
-        background-image: url('C:\\Users\\cosmi\\Desktop\\LICENTA\\RecipesProject\\LICENTA\\RecipesProject\\Views\\Home\\fundal2.jpg'); /* Înlocuiește 'caminul_catre_imagine.jpg' cu calea către imaginea ta */
-        background-size: cover; /* Aceasta va face ca imaginea să se întindă pe întreaga suprafață a fundalului */
-        background-position: center; /* Aceasta va centra imaginea pe fundal */
+        background-image: url('https://i.imgur.com/djh8fp8.jpg');
+        background-size: 100% auto; /* Fundalul va cuprinde întreaga imagine pe lățime */
+        background-position: center bottom; /* Imaginea va fi poziționată central pe axa orizontală și în partea de sus pe axa verticală */
+        background-attachment: fixed; /* Imaginea de fundal va rămâne fixă în timpul scroll-ului */
+        margin: 0; /* Elimină marginile implicite ale body-ului */
+        padding: 0; /* Elimină padding-ul implicite ale body-ului */
+        position: relative; /* Setează poziționarea relativă pentru a permite poziționarea absolută a butonului */
+    }
+
+    .btn-container {
+        position: absolute; /* Setează poziționarea absolută pentru containerul butonului */
+        bottom: 100px; /* Plasează containerul butonului la 20px distanță de partea de jos a paginii */
+        left: 0px; /* Plasează containerul butonului la 20px distanță de partea stângă a paginii */
+/*         top: 160px;
+        right: 0px; */
+        width: auto; /* Lățimea containerului se va adapta la conținut */
+        /* padding: 20px; */ /* Adăugă spațiu interior pentru containerul butonului */
+    }
+
+    .btn-primary {
+        background-color: rgba(25, 102, 20, 0.5); /* Culoare verde-padure cu transparență */
+        color: white; /* Schimbă culoarea textului butonului la alb */
+        font-size: 30px; /* Dimensiunea textului butonului */
+        font-family: 'Garamond', serif; /* Aplică fontul Garamond */
+        padding: 50px 70px; /* Adăugă un spațiu de padding în interiorul butonului */
+        transition: background-color 0.3s; /* Animarea schimbării culorii de fundal */
+        border: none; /* Elimină bordura butonului */
+        cursor: pointer; /* Schimbă cursorul la un pointer la trecerea peste buton */
+    }
+
+        .btn-primary:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* Culoarea butonului când cursorul este deasupra lui, cu opacitate redusă */
+        }
+
+        .btn-primary .large-text {
+            font-size: 32px; /* Dimensiunea textului pentru "GENERATE RECIPE" */
+        }
+
+        .btn-primary .small-text {
+            font-size: 15px; /* Dimensiunea textului pentru "click here to find your food" */
+        }
+
+        .btn-primary .text-container {
+            display: block; /* Afișează fiecare text pe o linie nouă */
+            text-align: center; /* Aliniază textul în centrul butonului */
+        }
+    .spacer {
+        height: 600px; /* Înălțimea spațiului gol este egală cu jumătate din înălțimea vizibilă a ferestrei de vizualizare */
     }
 </style>
 
-<a asp-controller="Generate" asp-action="Generate" class="btn btn-primary">Generate Recipe</a>
+<div class="btn-container">
+    <a asp-controller="Generate" asp-action="Generate" class="btn btn-primary">
+        <span class="text-container">
+        <span class="large-text">FIND YOUR RECIPE</span> <br />
+        <span class="small-text">click here to find any recipe</span>
+        </span>
+    </a>
+</div>
+
+<div class="spacer"></div> <!-- Adăugare spațiu gol pentru a permite scroll-ul -->
+
+
+<link rel="stylesheet" href="C:\Users\cosmi\Desktop\LICENTA\RecipesProject\LICENTA\RecipesProject\CSS\Styles.css" />

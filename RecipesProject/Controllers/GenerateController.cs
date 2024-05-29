@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RecipesProject.Data;
 using RecipesProject.Helpers;
@@ -47,6 +48,7 @@ namespace RecipesProject.Controllers
             string imagePrompt = lines[0];
 
             string image = GetImageFromPythonScript(imagePrompt);
+            //ViewData["Topic"] = imagePrompt;
             ViewData["Image"] = image;
 
             return View("GeneratedRecipe", ViewData);
@@ -66,9 +68,37 @@ namespace RecipesProject.Controllers
             _context.SaveChanges();
 
             // Redirectează către acțiunea "Recipe" care afișează toate rețetele
+
             return RedirectToAction("Index", "Recipe");
         }
 
+
+/*
+        [HttpPost]
+        public IActionResult Save(string recipeText)
+        {
+            // Verifică dacă utilizatorul este autentificat
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = _userManager.GetUserId(User); // Obține UserId-ul utilizatorului curent
+
+                // Crează o nouă instanță a modelului Recipe și salvează textul rețetei în câmpul corespunzător
+                var newRecipe = new Recipe { Description = recipeText, UserId = userId };
+                // Adaugă rețeta nouă în contextul bazei de date și salvează modificările
+                _context.Recipes.Add(newRecipe);
+                _context.SaveChanges();
+
+                // Redirectează către acțiunea "Recipe" care afișează toate rețetele
+                return RedirectToAction("Index", "Recipe");
+            }
+            else
+            {
+                // Utilizatorul nu este autentificat, deci poți returna o vizualizare specială sau redirecționa către o pagină de autentificare
+                return Redirect("/Identity/Account/Login");
+
+            }
+        }
+*/
         public IActionResult Favorite()
         {
             List<string> savedRecipes = HttpContext.Session.GetObject<List<string>>("SavedRecipes");

@@ -10,7 +10,7 @@ openai.api_key = 'sk-proj-BhwfasWOa85jqMZvwjXfT3BlbkFJFLgulPdqlC6fMfvEzHMW'
 # Definirea funcției pentru obținerea completării de la API-ul OpenAI
 def get_completion(ingredients, model="gpt-3.5-turbo"):
     # Construirea promptului utilizând variabilele primite de la utilizator
-    prompt = f"Genereaza o reteta, adica pasii de preparare si lista completa de ingrediente, folosind urmatoarele ingrediente: "
+    prompt = f"Genereaza o reteta in limba engleza, cu tot cu pasii de preparare si lista completa de ingrediente, folosind urmatoarele ingrediente: "
     prompt += ", ".join(ingredients) 
 
     # Generarea mesajului pentru API-ul OpenAI
