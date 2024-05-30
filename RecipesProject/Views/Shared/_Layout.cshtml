@@ -1,4 +1,29 @@
-﻿<!DOCTYPE html>
+﻿<style>
+    .navbar-home-img{
+        max-width: 35px; /* Setează lățimea maximă a imaginii */
+        height: auto; /* Asigură raportul corect între lățime și înălțime */
+        display: inline-block; /* Face ca imaginea să se alinieze corect în bara de navigare */
+        padding-top: 4.5px;
+       /*  margin-right: 10px;  *//* Adaugă un spațiu mic între imagine și text (opțional) */
+    }
+
+    .dropdown-img{
+        max-width: 30px; /* Setează lățimea maximă a imaginii */
+        height: auto; /* Asigură raportul corect între lățime și înălțime */
+        display: inline-block;
+    }
+
+    .border-top.footer.text-muted{
+        background-color: rgba(250, 255, 251, 0.9);
+    }
+
+    .navbar.navbar-expand-sm.navbar-toggleable-sm.navbar-light.border-bottom.box-shadow.mb-3{
+       background-color: rgba(250, 255, 251, 0.9);
+    }
+
+</style>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -10,17 +35,20 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <!-- Menu Items -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
+                            @*<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a> *@
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                                <img class="navbar-home-img" src="https://i.imgur.com/d2Kwbly.png" alt="Logo">
+                            </a>
+                       </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Menu
+                                <img class="dropdown-img" src="https://i.imgur.com/czwINdd.png" alt="Logo">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 @*                                 <a class="dropdown-item" asp-area="" asp-controller="Pantry" asp-action="Index">Pantry</a>
@@ -52,7 +80,7 @@
     </style>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - RecipesProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - RecipesProject @* <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> *@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

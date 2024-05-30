@@ -52,64 +52,73 @@
   </div>
 }
  *@
-@model IEnumerable<List>
 
-<div class="text"><h2> Your Shopping Lists</h2></div>
 
+ @model IEnumerable<List>
 
 <style>
-    /*         font-family: 'Montserrat', sans-serif;
-     */
-    body{
-        background-image: url('https://i.imgur.com/Uojd5x2.jpg');
-        background-size: cover; /* Asigură că imaginea de fundal se întinde pentru a acoperi întreaga suprafață a paginii */
-        background-position: top;
-        background-attachment: fixed; /* Face ca imaginea de fundal să rămână fixă în timpul scroll-ului */
+    body {
+        background-image: url('https://i.imgur.com/FmeFUGh.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
     }
+
     .recipe-container {
         display: flex;
         flex-wrap: wrap;
-        gap: 20px; /* Spațiu între divuri */
-        font-family: 'Dancing Script', cursive;
+        gap: 20px;
+        justify-content: center;
     }
 
-    .text{
-        font-family: 'Dancing Script', cursive;
+    .titlu {
+       /*  font-family: 'Dancing Script', cursive; */
         text-align: center;
-        font-size: 70px;
+        font-size: 60px;
         color: #003300;
+        width: 100%;
     }
 
-    .buton{
+    .buton {
         border-radius: 10px;
-        padding: 3px;
-        background-color:antiquewhite;
-        border-color: antiquewhite;
+        padding: 10px;
+/*         background-color: antiquewhite;
+        border-color: antiquewhite; */
+        box-sizing: border-box;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 3px dotted black;
+        color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        cursor: pointer;
+        width: calc(25% - 40px); /* Fiecare rând va avea 4 elemente */
+        text-align: center;
     }
 
-    .butondel{
-        background-color: #BECFC0;
-
-/*       border: none;
+    .butondel {
+        background: none;
+        border-radius: 10px;
+        border: none;
         cursor: pointer;
-        padding: 0;
-        margin: 0;
+        padding: 5px;
         position: absolute;
         top: 10px;
         right: 10px;
- */
     }
 
     .shopping-list {
+        position: relative;
         border: 1px solid black;
-        border-radius: 5px;
+        border-radius: 10px;
         padding: 10px;
-        width: calc(33.333% - 20px); /* 3 pe un rând cu spațiu între ele */
+        width: calc(25% - 40px); /* Fiecare rând va avea 4 elemente */
+        height: auto; /* Permite div-urilor să fie mai înalte */
         box-sizing: border-box;
-        background-color: rgba(255, 255, 255, 0.5); /* Fundal alb semi-transparent */
-        border-radius: 10px; /* Rotunjirea colțurilor */
-        border: 1px solid rgba(0, 0, 0, 0.2); /* Bordura semi-transparentă */
-        color: black; /* Culoarea textului */
+        background-color: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        color: black;
     }
 
         .shopping-list h3 {
@@ -121,7 +130,7 @@
         }
 
         .shopping-list ul {
-            padding-left: 20px; /* Setează indentarea pentru lista neordonată */
+            padding-left: 20px;
         }
 
             .shopping-list ul li {
@@ -140,9 +149,30 @@
     }
 
         .deleteItem:hover {
-            color: red; /* Opțional: schimbă culoarea la hover */
+            color: red;
         }
-       
+
+    .additem {
+        border: none;
+        background: none;
+        outline: none; /* Asigură că nu apare conturul implicit la focus */
+        color: black;
+        padding-left: 20px;
+        padding-top: 2px;
+    }
+
+    .custom-checkbox {
+        width: 16px;
+        height: 16px;
+        border: 1px solid;
+        border-radius: 3px;
+    }
+    
+    .addList{
+        border: black;
+        color: red;
+    }
+
 </style>
 
 <script>
@@ -150,33 +180,35 @@
         document.querySelectorAll('.item-input').forEach(function (input) {
             input.addEventListener('keypress', function (event) {
                 if (event.key === 'Enter') {
-                    event.preventDefault(); // Previi comportamentul implicit al Enter-ului
-                    this.form.submit(); // Trimiți formularul
+                    event.preventDefault();
+                    this.form.submit();
                 }
             });
         });
     });
 </script>
 
-<form asp-action="AddList" method="post">
-    <input type="text" name="name" placeholder="Add List Title" />
-    <button class="buton" type="submit">Add List</button>
-</form>
+<div class="titlu">Shopping Lists</></div>
 <br /><br />
 <div class="recipe-container">
+    <!-- Div pentru butonul "Add List" -->
+    <div class="buton">
+        <form asp-action="AddList" method="post">
+            <input type="text" name="name" placeholder="+ New List Title" style="border: none; background: none; outline: none; width: 80%; text-align: center;" />
+            <button class="addList" type="submit" style="border: none; background: none; outline: none; cursor: pointer;">Add List</button>
+        </form>
+    </div>
+
+    <!-- Divuri pentru listele de cumpărături -->
     @foreach (var list in Model)
     {
         <div class="shopping-list">
+            <button class="butondel" type="submit" form="delete-list-form-@list.Id">❌</button>
+            <br />
             <h3>@list.Name</h3>
-            <form asp-action="AddItem" method="post">
-                <input type="hidden" name="listId" value="@list.Id" />
-                <input type="text" name="text" placeholder="Add Item" class="item-input" />
-              @*   <button type="submit">Adaugă</button> *@
-            </form>
 
-            <form asp-action="DeleteList" method="post" style="display:inline;">
+            <form id="delete-list-form-@list.Id" asp-action="DeleteList" method="post" style="display:none;">
                 <input type="hidden" name="id" value="@list.Id" />
-                <button class="butondel" type="submit">delete list</button>
             </form>
 
             <ul>
@@ -185,20 +217,22 @@
                     <li>
                         <form asp-action="ToggleItem" method="post" style="display:inline;">
                             <input type="hidden" name="id" value="@item.Id" />
-                            <label class="custom-checkbox">
-                            <input type="checkbox" onchange="this.form.submit();" @(item.IsChecked ? "checked" : "") />
-                                <span></span>
-                            </label>
+                            <input class="custom-checkbox" type="checkbox" onchange="this.form.submit();" @(item.IsChecked ? "checked" : "") />
                             @Html.DisplayFor(modelItem => item.Text)
                         </form>
 
                         <form asp-action="DeleteItem" method="post" style="display:inline;">
                             <input type="hidden" name="id" value="@item.Id" />
-                            <button class="deleteItem" type="submit">❌</button>
+                            <button class="deleteItem" type="submit">🗑</button>
                         </form>
                     </li>
                 }
             </ul>
+
+            <form asp-action="AddItem" method="post">
+                <input type="hidden" name="listId" value="@list.Id" />
+                <input class="additem" type="text" name="text" placeholder="+ List Item" class="item-input" />
+            </form>
         </div>
     }
 </div>

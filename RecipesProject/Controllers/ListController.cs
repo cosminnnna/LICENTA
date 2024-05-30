@@ -19,10 +19,15 @@ namespace RecipesProject.Controllers
             _userManager = userManager;
         }
 
+
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
-            var lists = await _context.Lists.Include(l => l.Items).Where(l => l.UserId == userId).ToListAsync();
+            var lists = await _context.Lists
+                .Include(l => l.Items)
+                .Where(l => l.UserId == userId)
+                .OrderByDescending(l => l.CreatedDate) // Ordine descrescătoare după data creării
+                .ToListAsync();
             return View(lists);
         }
 
@@ -30,7 +35,7 @@ namespace RecipesProject.Controllers
         public async Task<IActionResult> AddList(string name)
         {
             var userId = _userManager.GetUserId(User);
-            var list = new List { Name = name, UserId = userId };
+            var list = new List { Name = name, UserId = userId, CreatedDate = DateTime.UtcNow }; // Setează data creării
             _context.Lists.Add(list);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
