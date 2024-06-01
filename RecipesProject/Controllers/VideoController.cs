@@ -31,7 +31,7 @@ namespace RecipesProject.Controllers
         }
 
         // Acțiune pentru a permite doar adminilor să adauge un nou link video
-        [Authorize(Roles = "Admin")]
+        /*[Authorize(Roles = "User, Admin")]*/
         public IActionResult AddVideo()
         {
             return View();
@@ -39,7 +39,7 @@ namespace RecipesProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+       /* [Authorize(Roles = "User, Admin")]*/
         public async Task<IActionResult> AddVideo(Video video)
         {
             if (ModelState.IsValid)

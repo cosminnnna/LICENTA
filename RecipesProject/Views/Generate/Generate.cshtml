@@ -1,10 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Generate Recipe";
 }
-<head>
+@* <head>
     <!-- Alte meta taguri și stiluri -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-</head>
+</head> *@
 
 <style>
     /* Stilurile pentru imaginea de fundal */
@@ -44,10 +44,10 @@
         border-radius: 25px; /* Margini rotunjite */
     }
 
-    .title {
+    .titlu{
         font-family: 'Dancing Script', cursive;
         text-align: left;
-        font-size: 60px;
+        font-size: 50px;
         color: #003300;
     }
 
@@ -91,9 +91,10 @@
 </style>
 
 <br />
-<div class="title">
+<div class="titlu">
     What ingredients do you have?
 </div>
+
 <br /><br />
 <form id="generateForm" asp-controller="Generate" asp-action="Generate" method="post">
     <div class="ingredient-section" id="ingredientFields">

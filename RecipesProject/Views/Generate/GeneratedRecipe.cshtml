@@ -1,33 +1,121 @@
-﻿﻿@{
+﻿ ﻿@{
     ViewData["Title"] = "Generated Recipe";
 }
+<style>
+    body {
+        background-image: url('https://i.imgur.com/7NJVdQt.jpg');
+        background-size: cover; /* Asigură că imaginea de fundal se întinde pentru a acoperi întreaga suprafață a paginii */
+        background-position: top;
+        background-attachment: fixed; /* Face ca imaginea de fundal să rămână fixă în timpul scroll-ului */
+    }
 
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
 
-@if (ViewData["Image"] != null)
-{
-    <div>
+    .image-container {
+        flex: 1;
+        padding-right: 20px; /* Spatiu între imagine și text */
+    }
 
-        <img src="@ViewData["Image"]" alt="Generated Image" style="width: 450px; height: auto;" />
+    .text-container {
+        flex: 1;
+    }
+
+    .buton {
+        display: block;
+        margin-top: 20px; /* Spațiu între text și buton */
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #ECF2A1;
+        background-color: #469532;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .buton:hover {
+            background-color: #3A8128;
+        }
+
+    .text {
+        font-family: 'Dancing Script', cursive;
+    }
+</style>
+<style>
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .image-container {
+        flex: 1;
+        padding-right: 20px; /* Spatiu între imagine și text */
+    }
+
+    .text-container {
+        flex: 1;
+    }
+
+    .buton {
+        display: block;
+        margin-top: 20px; /* Spațiu între text și buton */
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #ECF2A1;
+        background-color: #469532;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .buton:hover {
+            background-color: #3A8128;
+        }
+
+    .text {
+        font-family: 'Dancing Script', cursive;
+        max-width: 700px;
+        word-wrap: break-word;
+
+    }
+</style>
+<br /><br />
+<div class="container">
+    <div class="image-container">
+        @if (ViewData["Image"] != null)
+        {
+            <img src="@ViewData["Image"]" alt="Generated Image" style="max-width: 350px; height: auto;" />
+        }
+        else
+        {
+            <p>No image generated.</p>
+        }
     </div>
-}
-else
-{
-    <p>No image generated.</p>
-}
-<br />
 
-@if (ViewData["Recipe"] != null)
-{
-    <pre>@Html.Raw(ViewData["Recipe"])</pre>
-}
-else
-{
-    <p>No response generated.</p>
-}
+    <div class="text-container">
+        @if (ViewData["Recipe"] != null)
+        {
+            <div class="text">
+                <pre>@Html.Raw(ViewData["Recipe"])</pre>
+               
+                <form asp-controller="Generate" asp-action="Save" method="post">
+                    <input type="hidden" name="recipeText" value="@ViewData["Recipe"]" />
+                    <button class="buton" type="submit">Save Recipe</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <p>No response generated.</p>
+        }
+    </div>
+</div>
 
-
-<form asp-controller="Generate" asp-action="Save" method="post">
-    <input type="hidden" name="recipeText" value="@ViewData["Recipe"]" />
-    <button type="submit">Salvează Rețeta</button>
-</form>
-<br />

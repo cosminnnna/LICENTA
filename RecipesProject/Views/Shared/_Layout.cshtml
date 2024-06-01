@@ -1,16 +1,18 @@
 ﻿<style>
     .navbar-home-img{
-        max-width: 35px; /* Setează lățimea maximă a imaginii */
+        max-width: 25px; /* Setează lățimea maximă a imaginii */
         height: auto; /* Asigură raportul corect între lățime și înălțime */
-        display: inline-block; /* Face ca imaginea să se alinieze corect în bara de navigare */
-        padding-top: 4.5px;
+       /*  display: inline-block; */ /* Face ca imaginea să se alinieze corect în bara de navigare */
+        align-content: center;
+        padding-top: 8px;
        /*  margin-right: 10px;  *//* Adaugă un spațiu mic între imagine și text (opțional) */
     }
 
     .dropdown-img{
-        max-width: 30px; /* Setează lățimea maximă a imaginii */
+        max-width: 28px; /* Setează lățimea maximă a imaginii */
         height: auto; /* Asigură raportul corect între lățime și înălțime */
         display: inline-block;
+        align-content: center;
     }
 
     .border-top.footer.text-muted{
@@ -21,6 +23,24 @@
        background-color: rgba(250, 255, 251, 0.9);
     }
 
+    .navbar-nav .nav-link.dropdown-toggle::after {
+        display: none;
+    }
+
+
+    .dropdown-menu.show {
+        background-color: rgba(250, 255, 251, 0.9); /* Schimbați culoarea de fundal a meniului dropdown la alb */
+        margin-top: 100px;
+    }
+
+    .dropdown-menu .dropdown-item:focus,
+    .dropdown-menu .dropdown-item:active {
+        background-color: #F3F3F2;
+        ;
+            ; /* Schimbă culoarea de fundal la gri */
+        color: #212529; /* Schimbă culoarea textului pentru a asigura contrast */
+    }
+
 </style>
 
 <!DOCTYPE html>
@@ -28,7 +48,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RecipesProject</title>
+    <title>@ViewData["Title"] | RecipesProject</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RecipesProject.styles.css" asp-append-version="true" />
@@ -43,7 +63,7 @@
                         <li class="nav-item">
                             @*<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a> *@
                             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                                <img class="navbar-home-img" src="https://i.imgur.com/d2Kwbly.png" alt="Logo">
+                                <img class="navbar-home-img" src="https://i.imgur.com/rO2bFAu.png" alt="Logo">
                             </a>
                        </li>
                         <li class="nav-item dropdown">
@@ -57,8 +77,8 @@
                                 <a class="dropdown-item" asp-area="" asp-controller="List" asp-action="Index">Shopping List</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Recicle" asp-action="Index">Recicle Map</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Recipe" asp-action="Index">Saved Recipes</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Index">All users</a>
-                            </div>
+@*                                 <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Index">All users</a>
+ *@                            </div>
                         </li>
                     </ul>
                 </div>
@@ -80,7 +100,7 @@
     </style>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - RecipesProject @* <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> *@
+            &copy; 2024 - Cutomize Your Recipes @* <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> *@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

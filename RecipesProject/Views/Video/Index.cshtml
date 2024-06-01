@@ -1,76 +1,147 @@
-﻿@* @model List<string>
+﻿@model List<RecipesProject.Models.Video>
 
-@{
-    ViewData["Title"] = "News";
-}
+<style>
+    body {
+        background-image: url('https://i.imgur.com/nGdVYpF.jpg');
+        background-size: cover; /* Asigură că imaginea de fundal se întinde pentru a acoperi întreaga suprafață a paginii */
+        background-position: top;
+        background-attachment: fixed; /* Face ca imaginea de fundal să rămână fixă în timpul scroll-ului */
+    }
+    .thumbnail {
+        display: inline-block;
+        margin: 15px;
+        overflow: hidden; /* Elimină spațiile goale în jurul imaginilor */
+        width: calc(33.333% - 30px); /* Setează lățimea fiecărui thumbnail pentru a încăpea 3 pe un rând */
+        max-width: 300px; /* Definește o lățime maximă pentru thumbnail-uri */
+        height: 300px; /* Setează o înălțime fixă pentru containerul thumbnail-ului */
+        vertical-align: top; /* Aliniază containerul thumbnail-ului în partea de sus a liniei */
+    }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Video Thumbnails</title>
-</head>
-<body>
-    <h1>Video Thumbnails</h1>
-
-    <div id="video-thumbnails">
-        @foreach (var videoLink in Model)
-        {
-            <div class="thumbnail">
-                <a href="@videoLink" target="_blank">
-                    @{
-                        // Extrage ID-ul videoclipului YouTube din URL
-                        var videoIdStartIndex = videoLink.IndexOf("?v=") + 3;
-                        var videoId = videoLink.Substring(videoIdStartIndex);
-                    }
-                    <img src="https://img.youtube.com/vi/@videoId/0.jpg" alt="Thumbnail videoclip">
-                </a>
-            </div>
+        .thumbnail img {
+            width: 100%; /* Face ca imaginile să umple complet spațiul thumbnail-ului */
+            height: auto; /* Păstrează proporțiile imaginilor */
         }
-    </div>
 
+    .caption {
+        height: 50px; /* Setează o înălțime fixă pentru containerul titlului */
+        overflow: hidden; /* Ascunde textul care depășește containerul */
+        text-overflow: ellipsis; /* Adaugă puncte de suspensie (...) pentru textul care depășește containerul */
+        background-color: rgba(255, 255, 255, 0.5);
+        text-align: center;
+    }
 
-    <h2>Adăugare link video</h2>
+        .caption h3 {
+            font-size: 14px; /* Setează dimensiunea fontului pentru titlu */
+            margin-top: 5px; /* Elimină marginile pentru a reduce spațiul între titlu și marginile containerului */
+        }
 
-    <form asp-controller="Video" asp-action="AddLink">
-        <div class="form-group">
-            <label for="newLink">URL nou:</label>
-            <input type="text" class="form-control" id="newLink" name="newLink">
-        </div>
-        <button type="submit" class="btn btn-primary">Adăugare</button>
-    </form>
-</body>
-</html>
- *@
-@model List<RecipesProject.Models.Video>
+    .content {
+        text-align: center;
+    }
 
-<h1>Listă de linkuri video</h1>
+    .titlu {
+        font-family: 'Dancing Script', cursive;
+        text-align: center;
+        font-size: 40px;
+        padding-bottom: 30px;
 
-<div class="row">
+    }
+</style>
+
+<div class="titlu">
+   Watch what is new for a sustainable lifestyle!
+</div>
+<br />
+
+<div class="content">
     @foreach (var video in Model)
     {
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <img src="https://img.youtube.com/vi/@video.Link/hqdefault.jpg" alt="Thumbnail">
-                <div class="caption">
-                    <h3>Link:</h3>
-                    <p>@video.Link</p>
-                </div>
+        // Extrage ID-ul videoclipului din link-ul complet către videoclipul de pe YouTube
+        var videoID = ExtractYouTubeVideoID(video.Link);
+
+        // Apelăm funcția pentru a obține titlul videoclipului
+        var videoTitle = GetYouTubeVideoTitle(videoID);
+
+        <div class="thumbnail">
+            <a href="@video.Link" target="_blank">
+                <img src="https://img.youtube.com/vi/@videoID/hqdefault.jpg" alt="Thumbnail">
+            </a>
+            <!-- Afisează titlul videoclipului -->
+            <div class="caption">
+                <h3>@videoTitle</h3>
             </div>
         </div>
     }
 </div>
 
-@* Formular pentru adăugarea de noi linkuri video *@
-
-@using (Html.BeginForm("AddVideo", "Video", FormMethod.Post))
+<!-- Formular pentru adăugarea de noi linkuri video -->
+<br />
+<br />
+@* @using (Html.BeginForm("AddVideo", "Video", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-group">
-        <label class="control-label">Link:</label>
-        <input type="text" name="Link" class="form-control" required>
+        <input type="text" name="Link" class="form-control" required placeholder="Paste YouTube link here">
         @Html.ValidationMessageFor(model => model[0].Link, "", new { @class = "text-danger" })
     </div>
 
     <button type="submit" class="btn btn-primary">Adaugă videoclip</button>
+} *@
+
+@functions {
+    // Funcție pentru a extrage ID-ul videoclipului din link-ul complet către videoclipul de pe YouTube
+    public string ExtractYouTubeVideoID(string youtubeUrl)
+    {
+        var videoId = "";
+        try
+        {
+            var uri = new Uri(youtubeUrl);
+            var query = uri.Query;
+            if (!string.IsNullOrEmpty(query))
+            {
+                var queryParams = query.TrimStart('?').Split('&');
+                foreach (var param in queryParams)
+                {
+                    var parts = param.Split('=');
+                    if (parts.Length == 2 && parts[0] == "v")
+                    {
+                        videoId = parts[1];
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                var segments = uri.Segments;
+                videoId = segments.LastOrDefault();
+            }
+        }
+        catch
+        {
+            // în cazul în care nu se poate extrage ID-ul
+        }
+        return videoId;
+    }
+
+    // Funcție pentru a obține titlul videoclipului folosind YouTube Data API v3
+    public string GetYouTubeVideoTitle(string videoId)
+    {
+        var apiKey = "AIzaSyCESHG0506acojUDo8pp7hWzeqikGTjBqo"; // Înlocuiește cu cheia API pe care ai obținut-o
+        var apiUrl = $"https://www.googleapis.com/youtube/v3/videos?part=snippet&id={videoId}&key={apiKey}";
+
+        try
+        {
+            using (var client = new System.Net.WebClient())
+            {
+                var response = client.DownloadString(apiUrl);
+                dynamic data = Newtonsoft.Json.JsonConvert.DeserializeObject(response);
+                return data.items[0].snippet.title;
+            }
+        }
+        catch (Exception ex)
+        {
+            return "Titlu indisponibil";
+        }
+    }
 }
