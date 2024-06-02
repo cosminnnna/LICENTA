@@ -1,4 +1,4 @@
-﻿@* @model List<RecipesProject.Models.Video>
+﻿@*
 
 <style>
     body {
@@ -146,6 +146,9 @@
     }
 } *@
 
+@{
+    ViewData["Title"] = "News";
+}
 
 @model List<RecipesProject.Models.Video>
 
@@ -173,7 +176,7 @@
         }
 
     .caption {
-        height: 50px; /* Setează o înălțime fixă pentru containerul titlului */
+        height: 60px; /* Setează o înălțime fixă pentru containerul titlului */
         overflow: hidden; /* Ascunde textul care depășește containerul */
         text-overflow: ellipsis; /* Adaugă puncte de suspensie (...) pentru textul care depășește containerul */
         background-color: rgba(255, 255, 255, 0.5);
@@ -205,9 +208,15 @@
 <div class="content">
     @{
         var apiKey = "AIzaSyCESHG0506acojUDo8pp7hWzeqikGTjBqo";
+        //prompt de cautare
         var searchTerm = "food waste prevention";
-        var maxResults = 12;
-        var apiUrl = $"https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults={maxResults}&q={searchTerm}&type=video&key={apiKey}";
+        var maxResults = 15;
+        //cele mai populare
+        //var apiUrl = $"https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults={maxResults}&q={searchTerm}&type=video&key={apiKey}";
+
+        //cele mai noi
+        var apiUrl = $"https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults={maxResults}&q={searchTerm}&order=date&type=video&key={apiKey}";
+
     }
 
     @try

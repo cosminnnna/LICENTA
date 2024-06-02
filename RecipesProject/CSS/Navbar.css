@@ -1,0 +1,7 @@
+﻿
+/* Interogare media pentru dimensiunile ecranului mai mici de 260px */
+@media (max-width: 260px) {
+    .navbar-nav .nav-item {
+        display: inline-block; /* Setează butoanele să fie afișate ca blocuri inline */
+    }
+}

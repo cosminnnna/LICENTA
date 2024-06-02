@@ -13,4 +13,24 @@
         background-position: top; /* Poziționează imaginea în partea de sus */
     }
 }
+
+/* Adaugăm stilul pentru a face meniul navbar să rămână fixat */
+@media (max-width: 576px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        transition: all 0.3s ease-in-out;
+        background-color: rgba(255, 255, 255, 0.9);
+        z-index: 1000;
+    }
+
+        .navbar-collapse.show {
+            left: 0;
+        }
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
