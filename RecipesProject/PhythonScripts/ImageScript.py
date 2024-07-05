@@ -3,7 +3,7 @@ import time
 import sys
 
 # Setarea cheii de API OpenAI
-openai.api_key = 'sk-proj-BhwfasWOa85jqMZvwjXfT3BlbkFJFLgulPdqlC6fMfvEzHMW'
+openai.api_key = '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'
 
 # Definirea funcției pentru generarea imaginii de la API-ul OpenAI
 def generate_image(recipe):

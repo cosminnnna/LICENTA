@@ -124,9 +124,12 @@
             clearMarkersPaper();
             // Defineste locatiile pentru hartie
             var paperLocations = [
-                { lat: 44.43225, lng: 26.10626 },
-                { lat: 44.3821351, lng: 26.1534615 }
-                // Adaugati alte locatii pentru hartie aici, daca este nevoie
+                { lat: 44.435450, lng: 26.101020 },
+                { lat: 44.454990, lng: 26.128800 },
+                { lat: 44.424850, lng: 26.083060 },
+                { lat: 44.4247798, lng: 26.078472 },
+                { lat: 44.4632204, lng: 26.1081239 },
+                { lat: 44.4187087, lng: 26.0959615 }
             ];
 
             // Afiseaza locatiile pe harta
@@ -141,17 +144,16 @@
             });
         }
 
-        // Functia care va fi apelata atunci cand utilizatorul apasa butonul "Plastic"
         function getPlasticLocation() {
             clearMarkersPlastic();
-            // Defineste locatiile pentru plastic
             var plasticLocations = [
-                { lat: 44.4083471, lng: 26.1399083 },
-                { lat: 44.4089996, lng: 26.1969409 }
-                // Adaugati alte locatii pentru plastic aici, daca este nevoie
+                { lat: 44.4068932, lng: 26.0835577 },
+                { lat: 44.4502631, lng: 26.0835948 },
+                { lat: 44.4619798, lng: 26.0730663 },
+                { lat: 44.4090033, lng: 26.2014734 },
+                { lat: 44.4124273, lng: 26.0724678 }
             ];
 
-            // Afiseaza locatiile pe harta
             plasticLocations.forEach(function (location) {
                 var plasticMarker = new google.maps.Marker({
                     position: location,
@@ -166,14 +168,13 @@
         // Functia care va fi apelata atunci cand utilizatorul apasa butonul "Glass"
         function getGlassLocation() {
             clearMarkersGlass();
-            // Defineste locatiile pentru sticla
             var glassLocations = [
                 { lat: 44.4636665, lng: 26.109916 },
-                { lat: 44.4759096, lng: 26.1790872 }
-                // Adaugati alte locatii pentru sticla aici, daca este nevoie
+                { lat: 44.4339943, lng: 26.0897056 },
+                { lat: 44.4449965, lng: 26.0988148 },
+                { lat: 44.4521716, lng: 26.1101154 }
             ];
 
-            // Afiseaza locatiile pe harta
             glassLocations.forEach(function (location) {
                 var glassMarker = new google.maps.Marker({
                     position: location,
@@ -188,14 +189,15 @@
         // Functia care va fi apelata atunci cand utilizatorul apasa butonul "Metal"
         function getMetalLocation() {
             clearMarkersMetal();
-            // Defineste locatiile pentru metal
+
             var metalLocations = [
                 { lat: 44.4289447, lng: 26.0351844 },
-                { lat: 44.3843606, lng: 26.0595703 }
-                // Adaugati alte locatii pentru metal aici, daca este nevoie
+                { lat: 44.479142, lng: 26.1022244 },
+                { lat: 44.4884912, lng: 26.1902001 },
+                { lat: 44.4000125, lng: 26.0439531 },
+                { lat: 44.4386837, lng: 26.0765745 }
             ];
 
-            // Afiseaza locatiile pe harta
             metalLocations.forEach(function (location) {
                 var metalMarker = new google.maps.Marker({
                     position: location,

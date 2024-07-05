@@ -5,7 +5,7 @@ import time
 import sys
 
 # Setarea cheii de API OpenAI
-openai.api_key = 'sk-proj-BhwfasWOa85jqMZvwjXfT3BlbkFJFLgulPdqlC6fMfvEzHMW'
+openai.api_key = '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'
 
 # Definirea funcției pentru obținerea completării de la API-ul OpenAI
 def get_completion(ingredients, model="gpt-3.5-turbo"):
